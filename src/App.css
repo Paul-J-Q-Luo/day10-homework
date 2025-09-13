@@ -1,11 +1,39 @@
 .todo-item {
-    width: 120px;
+    /* 使用 Flexbox 布局 */
+    display: flex;
+    /* 垂直居中对齐 */
+    align-items: center;
+    /* 确保文本内容和按钮之间有空间 */
+    justify-content: space-between;
+
+    width: 300px;
     padding: 8px;
     border: 1px solid black;
     margin: 10px;
-    text-align: center;
+}
+
+/* 确保文本内容可以占据剩余空间 */
+.todo-item span {
+    flex-grow: 1;
+    text-align: left;
 }
 
 .todo-item .todo-done {
     text-decoration: line-through;
+}
+
+/* 样式化删除按钮 */
+.todo-item button {
+    /* 移除默认的边框和背景 */
+    border: none;
+    background-color: transparent;
+    /* 更改字体为 Times New Roman 或类似样式 */
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 0 8px;
+
+    /* 调整按钮的边框样式 */
+    border: 1px solid black;
+    border-radius: 2px;
 }
