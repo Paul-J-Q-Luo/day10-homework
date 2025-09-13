@@ -13,6 +13,7 @@ body {
 .app-main-container {
     width: 100%;
     max-width: 400px; /* 保持应用的整体最大宽度 */
+    min-width: 350px; /* 保持应用的整体最小宽度 */
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
@@ -81,6 +82,7 @@ body {
     align-items: center;
     justify-content: space-between;
 
+    min-width: 350px; /* 保持每个待办事项的最小宽度 */
     width: 100%; /* 确保填满父容器的宽度 */
     box-sizing: border-box; /* 关键：确保 padding 和 border 包含在 width 内 */
 
@@ -130,4 +132,6 @@ body {
     font-size: 1.2em;
     margin: 20px 0; /* 调整上下边距 */
     text-align: center;
+    display: block;
+    width: 100%;
 }
