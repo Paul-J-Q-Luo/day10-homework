@@ -1,10 +1,18 @@
-import {useContext, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 
 import {TodoContext} from "../contexts/TodoContext";
 
 export function TodoItem(props) {
     const [state, dispatch] = useContext(TodoContext);
     const [isDeleting, setIsDeleting] = useState(false);
+    const [isAdding, setIsAdding] = useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsAdding(false);
+        }, 10);
+        return () => clearTimeout(timer);
+    }, []);
 
     function makeDone() {
         dispatch({
@@ -25,7 +33,7 @@ export function TodoItem(props) {
         }, animationDuration);
     }
 
-    return <div className={`todo-item ${isDeleting ? "deleting" : ""}`}>
+    return <div className={`todo-item ${isDeleting ? "deleting" : ""} ${isAdding ? "adding" : ""}`}>
             <span
                 className={props.todo.done ? "todo-done" : ""}
                 onClick={makeDone}

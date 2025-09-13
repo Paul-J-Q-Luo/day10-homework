@@ -99,6 +99,11 @@ body {
     transform: scale(0.8); /* 缩小至80% */
 }
 
+.todo-item.adding {
+    opacity: 0;
+    transform: translateY(20px); /* 向上移动20px */
+}
+
 .todo-item span {
     flex-grow: 1;
     text-align: left;
