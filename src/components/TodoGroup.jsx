@@ -7,8 +7,7 @@ export function TodoGroup() {
     const [state, dispatch] = useContext(TodoContext);
 
     return <div>
-        <div className="todo-container">
-            <h2 className="todo-list-title">Todo List</h2>
+        <div className="todo-list-wrapper">
             {state.length > 0 ? (
                 state.map((item) => {
                     return <TodoItem key={item.id} todo={item} />;
