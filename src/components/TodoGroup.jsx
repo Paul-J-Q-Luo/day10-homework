@@ -7,10 +7,15 @@ export function TodoGroup() {
     const [state, dispatch] = useContext(TodoContext);
 
     return <div>
-        {
-            state.map((item, index) => {
-                return <TodoItem key={index} todo={item} index={index}/>
-            })
-        }
+        <div className="todo-container">
+            <h2 className="todo-list-title">Todo List</h2>
+            {state.length > 0 ? (
+                state.map((item) => {
+                    return <TodoItem key={item.id} todo={item} />;
+                })
+            ) : (
+                <p className="empty-message">Add the things you need to do today...</p>
+            )}
+        </div>
     </div>
 }
