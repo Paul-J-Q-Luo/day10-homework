@@ -4,10 +4,14 @@ import { TodoContext } from "../contexts/TodoContext";
 export function TodoAddForm() {
     const [inputText, setInputText] = useState("");
     const [state, dispatch] = useContext(TodoContext);
+    const [inputInvalid, setInputInvalid] = useState(false);
 
     function handleSubmit(e) {
         e.preventDefault(); // 阻止表单默认提交行为
-        if (inputText.trim() === "") return; // 避免添加空任务
+        if (inputText.trim() === "") {
+            setInputInvalid(true); // 如果为空，设置状态为true
+            return;
+        }
 
         const newTodo = {
             id: Date.now(), // 使用时间戳作为唯一ID
@@ -21,6 +25,14 @@ export function TodoAddForm() {
         });
 
         setInputText(""); // 清空输入框
+        setInputInvalid(false); // 成功添加后，重置状态
+    }
+
+    function handleInputChange(e) {
+        setInputText(e.target.value);
+        if (inputInvalid) {
+            setInputInvalid(false);
+        }
     }
 
     return (
@@ -28,8 +40,9 @@ export function TodoAddForm() {
             <input
                 type="text"
                 value={inputText}
-                onChange={(e) => setInputText(e.target.value)}
+                onChange={handleInputChange}
                 placeholder="Add a new todo..."
+                className={inputInvalid ? "input-invalid" : ""}
             />
             <button type="submit">Add</button>
         </form>
