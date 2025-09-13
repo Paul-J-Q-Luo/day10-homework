@@ -90,6 +90,13 @@ body {
     border: 1px solid #ddd; /* 统一边框颜色 */
     border-radius: 6px;
     background-color: #f9f9f9;
+
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.todo-item.deleting {
+    opacity: 0; /* 变为完全透明 */
+    transform: scale(0.8); /* 缩小至80% */
 }
 
 .todo-item span {
