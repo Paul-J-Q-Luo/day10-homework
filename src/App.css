@@ -153,3 +153,12 @@ body {
     display: block;
     width: 100%;
 }
+
+.todo-stats {
+    font-size: 0.9em;
+    color: #666;
+    text-align: right; /* 靠右对齐 */
+    width: 100%;
+    margin-top: -10px; /* 调整与上方元素的间距 */
+    margin-bottom: 20px;
+}
