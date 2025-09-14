@@ -24,7 +24,7 @@ export function TodoItem(props) {
     function makeDelete() {
         setIsDeleting(true);
 
-        const animationDuration = 300; // 动画持续时间，与CSS中的保持一致
+        const animationDuration = 300;
         setTimeout(() => {
             dispatch({
                 type: "DELETE_TODO",

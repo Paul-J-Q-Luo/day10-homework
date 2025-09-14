@@ -7,14 +7,14 @@ export function TodoAddForm() {
     const [inputInvalid, setInputInvalid] = useState(false);
 
     function handleSubmit(e) {
-        e.preventDefault(); // 阻止表单默认提交行为
+        e.preventDefault();
         if (inputText.trim() === "") {
-            setInputInvalid(true); // 如果为空，设置状态为true
+            setInputInvalid(true);
             return;
         }
 
         const newTodo = {
-            id: Date.now(), // 使用时间戳作为唯一ID
+            id: Date.now(),
             text: inputText,
             done: false
         };
@@ -24,8 +24,8 @@ export function TodoAddForm() {
             payload: newTodo
         });
 
-        setInputText(""); // 清空输入框
-        setInputInvalid(false); // 成功添加后，重置状态
+        setInputText("");
+        setInputInvalid(false);
     }
 
     function handleInputChange(e) {
