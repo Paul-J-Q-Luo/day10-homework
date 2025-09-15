@@ -135,6 +135,12 @@ body {
     color: #555;
 }
 
+.todo-item-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
 .empty-message {
     font-style: italic;
     color: #999;

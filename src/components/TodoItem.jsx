@@ -45,7 +45,9 @@ export function TodoItem(props) {
             >
                 {props.todo.text}
             </span>
-        <button onClick={makeDelete}>X</button>
-        <button onClick={goToDetail}>detail</button>
+        <div className="todo-item-buttons">
+            <button onClick={makeDelete}>X</button>
+            <button onClick={goToDetail}>detail</button>
+        </div>
     </div>;
 }
