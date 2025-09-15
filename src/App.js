@@ -3,12 +3,33 @@ import {useReducer} from "react";
 import {todoReducer} from "./reducers/TodoReducer";
 import {TodoContext} from "./contexts/TodoContext";
 import {TodoApp} from "./components/TodoApp";
-import {createBrowserRouter, RouterProvider} from "react-router";
+import {createBrowserRouter, NavLink, Outlet, RouterProvider} from "react-router";
+
+function DefaultLayout() {
+    return <div>
+        <header>
+            <nav>
+                <ul>
+                    <li><NavLink to={"/"}>Home</NavLink></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <Outlet/>
+        </main>
+    </div>
+}
 
 const routes = createBrowserRouter([
     {
         path: "/",
-        element: <TodoApp />
+        element: <DefaultLayout />,
+        children: [
+            {
+                path: "/",
+                element: <TodoApp />
+            }
+        ]
     }
 ])
 
