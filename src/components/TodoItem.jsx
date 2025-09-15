@@ -1,6 +1,7 @@
 import {useContext, useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {TodoContext} from "../contexts/TodoContext";
+import {api} from "../api/mockApi";
 
 export function TodoItem(props) {
     const [state, dispatch] = useContext(TodoContext);
@@ -16,10 +17,12 @@ export function TodoItem(props) {
     }, []);
 
     function makeDone() {
-        dispatch({
-            type: "TOGGLE_TODO",
-            payload: {id: props.todo.id}
-        })
+        api.put("/todos/" + props.todo.id, {id: props.todo.id, done: !props.todo.done})
+            .then(res => res.data)
+            .then(todo => dispatch({
+                type: "TOGGLE_TODO",
+                payload: {id: todo.id}
+            }));
     }
 
     function makeDelete() {
@@ -27,10 +30,18 @@ export function TodoItem(props) {
 
         const animationDuration = 300;
         setTimeout(() => {
-            dispatch({
-                type: "DELETE_TODO",
-                payload: { id: props.todo.id }
-            });
+            api.delete(`/todos/${props.todo.id}`)
+                .then(() => {
+                    dispatch({
+                        type: "DELETE_TODO",
+                        payload: {id: props.todo.id}
+                    });
+                })
+                .catch(error => {
+                    alert("Failed to delete the todo item. Please try again.");
+                    console.error("Failed to delete todo:", error);
+                    setIsDeleting(false);
+                });
         }, animationDuration);
     }
 
