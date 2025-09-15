@@ -6,7 +6,7 @@ import {TodoItem} from "../components/TodoItem";
 export function TodoDetailPage() {
     const {id} = useParams()
     const [state] = useContext(TodoContext)
-    const todo = state.filter((todo) => todo.id === parseInt(id))
+    const todo = state.filter((todo) => todo.id === id)
 
     if (todo.length === 0) {
         return <div className="empty-message">Todo not found</div>
