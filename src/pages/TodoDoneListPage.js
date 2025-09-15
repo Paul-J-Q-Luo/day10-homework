@@ -1,22 +1,30 @@
 import {useContext} from "react";
 import {TodoContext} from "../contexts/TodoContext";
+import {List, Typography, Empty} from 'antd';
 import {TodoItem} from "../components/TodoItem";
 
+const {Title} = Typography;
+
 export function TodoDoneListPage() {
-    const [state] = useContext(TodoContext)
+    const [state] = useContext(TodoContext);
     const doneTodos = state.filter(item => item.done);
 
     return (
         <div className="app-main-container">
-            <h2 className="page-title">Done List</h2>
+            <Title level={2} className="page-title">Done List</Title>
+
             {doneTodos.length > 0 ? (
-                <div className="todo-list-wrapper">
-                    {doneTodos.map((item) => (
-                        <TodoItem key={item.id} todo={item} />
-                    ))}
-                </div>
+                <List
+                    className="todo-list-wrapper"
+                    dataSource={doneTodos}
+                    renderItem={item => (
+                        <List.Item>
+                            <TodoItem key={item.id} todo={item}/>
+                        </List.Item>
+                    )}
+                />
             ) : (
-                <p className="empty-message">No done things...</p>
+                <Empty description="No completed tasks yet. Go get some done!" />
             )}
         </div>
     );
