@@ -185,3 +185,8 @@ body {
 .about-card {
     margin-bottom: 24px;
 }
+
+.detail-status {
+    display: flex;
+    align-items: center;
+}
