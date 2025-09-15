@@ -21,9 +21,9 @@ function App() {
     const [state, dispatch] = useReducer(todoReducer, initData);
     return (
         <div className="App">
-            <TodoContext value={[state, dispatch]}>
+            <TodoContext.Provider value={[state, dispatch]}>
                 <RouterProvider router={routes}></RouterProvider>
-            </TodoContext>
+            </TodoContext.Provider>
         </div>
     );
 }
