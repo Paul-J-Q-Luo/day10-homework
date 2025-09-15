@@ -17,7 +17,7 @@ export function TodoGroup() {
 
             {state.length > 0 ? (
                 state.map((item) => {
-                    return <TodoItem key={item.id} todo={item} />;
+                    return <TodoItem key={item.id} todo={item} showDetail={true}/>;
                 })
             ) : (
                 <p className="empty-message">Add the things you need to do today...</p>

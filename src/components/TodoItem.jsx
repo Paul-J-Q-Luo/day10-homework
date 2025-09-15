@@ -58,7 +58,7 @@ export function TodoItem(props) {
             </span>
         <div className="todo-item-buttons">
             <button onClick={makeDelete}>X</button>
-            <button onClick={goToDetail}>detail</button>
+            {props.showDetail && <button onClick={goToDetail}>detail</button>}
         </div>
     </div>;
 }

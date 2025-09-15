@@ -14,6 +14,6 @@ export function TodoDetailPage() {
 
     return <div className="app-main-container">
         <h2 className="page-title">Todo Detail</h2>
-        <TodoItem todo={todo[0]} index={id}></TodoItem>
+        <TodoItem todo={todo[0]} index={id} showDetail={false}></TodoItem>
     </div>;
 }
