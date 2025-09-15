@@ -1,5 +1,6 @@
-import { useState, useContext } from "react";
-import { TodoContext } from "../contexts/TodoContext";
+import {useState, useContext} from "react";
+import {TodoContext} from "../contexts/TodoContext";
+import {api} from "../api/mockApi";
 
 export function TodoAddForm() {
     const [inputText, setInputText] = useState("");
@@ -14,15 +15,16 @@ export function TodoAddForm() {
         }
 
         const newTodo = {
-            id: Date.now(),
             text: inputText,
             done: false
         };
 
-        dispatch({
-            type: "ADD_TODO",
-            payload: newTodo
-        });
+        api.post("/todos", newTodo)
+            .then(res => res.data)
+            .then(todo => dispatch({
+                type: "ADD_TODO",
+                payload: todo
+            }));
 
         setInputText("");
         setInputInvalid(false);
