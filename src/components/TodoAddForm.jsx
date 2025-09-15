@@ -1,19 +1,21 @@
-import {useContext, useState} from "react";
-import {TodoContext} from "../contexts/TodoContext";
-import {useTodoService} from "../useTodoService";
+import { useContext, useState } from "react";
+import { TodoContext } from "../contexts/TodoContext";
+import { useTodoService } from "../useTodoService";
+import { Input, Button, Space } from 'antd';
 
 export function TodoAddForm() {
     const [inputText, setInputText] = useState("");
     const [state, dispatch] = useContext(TodoContext);
-    const [inputInvalid, setInputInvalid] = useState(false);
-    const {createTodo} = useTodoService();
+    const [loading, setLoading] = useState(false); // Add a loading state for the button
+    const { createTodo } = useTodoService();
 
     function handleSubmit(e) {
         e.preventDefault();
         if (inputText.trim() === "") {
-            setInputInvalid(true);
             return;
         }
+
+        setLoading(true);
 
         const newTodo = {
             text: inputText,
@@ -21,32 +23,37 @@ export function TodoAddForm() {
         };
 
         createTodo(newTodo)
-            .then(todo => dispatch({
-                type: "ADD_TODO",
-                payload: todo
-            }));
+            .then(todo => {
+                dispatch({
+                    type: "ADD_TODO",
+                    payload: todo
+                });
+            })
+            .finally(() => {
+                setLoading(false);
+            });
 
         setInputText("");
-        setInputInvalid(false);
-    }
-
-    function handleInputChange(e) {
-        setInputText(e.target.value);
-        if (inputInvalid) {
-            setInputInvalid(false);
-        }
     }
 
     return (
-        <form className="add-form" onSubmit={handleSubmit}>
-            <input
-                type="text"
-                value={inputText}
-                onChange={handleInputChange}
-                placeholder="Add a new todo..."
-                className={inputInvalid ? "input-invalid" : ""}
-            />
-            <button type="submit">Add</button>
+        <form onSubmit={handleSubmit} style={{ width: '100%' }}>
+            <Space.Compact style={{ width: '100%' }}>
+                <Input
+                    placeholder="Add a new todo..."
+                    value={inputText}
+                    onChange={(e) => setInputText(e.target.value)}
+                    status={inputText.trim() === "" ? "error" : undefined}
+                />
+                <Button
+                    type="primary"
+                    htmlType="submit"
+                    loading={loading}
+                    disabled={inputText.trim() === ""}
+                >
+                    Add
+                </Button>
+            </Space.Compact>
         </form>
     );
 }
