@@ -1,11 +1,12 @@
-import {useState, useContext} from "react";
+import {useContext, useState} from "react";
 import {TodoContext} from "../contexts/TodoContext";
-import {api} from "../api/mockApi";
+import {useTodoService} from "../useTodoService";
 
 export function TodoAddForm() {
     const [inputText, setInputText] = useState("");
     const [state, dispatch] = useContext(TodoContext);
     const [inputInvalid, setInputInvalid] = useState(false);
+    const {createTodo} = useTodoService();
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -19,8 +20,7 @@ export function TodoAddForm() {
             done: false
         };
 
-        api.post("/todos", newTodo)
-            .then(res => res.data)
+        createTodo(newTodo)
             .then(todo => dispatch({
                 type: "ADD_TODO",
                 payload: todo

@@ -4,13 +4,13 @@ import {todoReducer} from "./reducers/TodoReducer";
 import {TodoContext} from "./contexts/TodoContext";
 import {RouterProvider} from "react-router";
 import {routes} from "./routes/Routes";
-import {api} from "./api/mockApi";
+import {useTodoService} from "./useTodoService";
 
 function App() {
     const [state, dispatch] = useReducer(todoReducer, []);
+    const {loadTodos} = useTodoService();
     useEffect(() => {
-        api.get("/todos")
-            .then(response => response.data)
+        loadTodos()
             .then(todos => dispatch({type: "LOAD_TODOS", payload: todos}))
     }, [dispatch]);
 

@@ -1,13 +1,14 @@
 import {useContext, useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {TodoContext} from "../contexts/TodoContext";
-import {api} from "../api/mockApi";
+import {useTodoService} from "../useTodoService";
 
 export function TodoItem(props) {
     const [state, dispatch] = useContext(TodoContext);
     const [isDeleting, setIsDeleting] = useState(false);
     const [isAdding, setIsAdding] = useState(true);
     const navigate = useNavigate();
+    const {updateTodo, deleteTodo} = useTodoService();
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -17,11 +18,10 @@ export function TodoItem(props) {
     }, []);
 
     function makeDone() {
-        api.put("/todos/" + props.todo.id, {id: props.todo.id, done: !props.todo.done})
-            .then(res => res.data)
+        updateTodo(props)
             .then(todo => dispatch({
-                type: "TOGGLE_TODO",
-                payload: {id: todo.id}
+                type: "UPDATE_TODO",
+                payload: todo
             }));
     }
 
@@ -30,7 +30,7 @@ export function TodoItem(props) {
 
         const animationDuration = 300;
         setTimeout(() => {
-            api.delete(`/todos/${props.todo.id}`)
+            deleteTodo(props)
                 .then(() => {
                     dispatch({
                         type: "DELETE_TODO",

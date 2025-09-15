@@ -4,14 +4,13 @@ export function todoReducer(state, action) {
             return action.payload;
         case "ADD_TODO":
             return [...state, action.payload];
-        case "TOGGLE_TODO":
+        case "UPDATE_TODO":
             return state.map(todo =>
-                todo.id === action.payload.id ? {...todo, done: !todo.done} : todo
+                todo.id === action.payload.id ? action.payload : todo
             );
         case "DELETE_TODO":
             return state.filter(todo => todo.id !== action.payload.id);
         default:
             return state;
     }
-    return state;
 }
