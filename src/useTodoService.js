@@ -4,7 +4,7 @@ export function useTodoService() {
     const loadTodos = () => api.get("/todos")
         .then(response => response.data);
 
-    const updateTodo = props => api.put("/todos/" + props.todo.id, {text: props.todo.text, done: !props.todo.done})
+    const updateTodo = todo => api.put(`/todos/${todo.id}`, todo)
         .then(res => res.data);
 
     const deleteTodo = props => api.delete(`/todos/${props.todo.id}`);
