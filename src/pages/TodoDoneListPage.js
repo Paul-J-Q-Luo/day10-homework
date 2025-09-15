@@ -4,9 +4,11 @@ import {TodoItem} from "../components/TodoItem";
 
 export function TodoDoneListPage() {
     const [state] = useContext(TodoContext)
+    const doneTodos = state.filter(item => item.done);
+
     return <div>
-        {state.length > 0 ? (
-            state.filter(item => item.done).map((item) => {
+        {doneTodos.length > 0 ? (
+            doneTodos.map((item) => {
                 return <TodoItem key={item.id} todo={item} />;
             })
         ) : (
