@@ -6,7 +6,7 @@ import { Input, Button, Space } from 'antd';
 export function TodoAddForm() {
     const [inputText, setInputText] = useState("");
     const [state, dispatch] = useContext(TodoContext);
-    const [loading, setLoading] = useState(false); // Add a loading state for the button
+    const [loading, setLoading] = useState(false);
     const { createTodo } = useTodoService();
 
     function handleSubmit(e) {
